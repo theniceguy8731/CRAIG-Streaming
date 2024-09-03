@@ -285,7 +285,7 @@ def get_facility_location_submodular_order(S, B, c, smtk=0, no=0, stoch_greedy=0
 def faciliy_location_order(c, X, y, metric, num_per_class, smtk, no, stoch_greedy, weights=None):
     class_indices = np.where(y == c)[0]
     print(c)
-    print(class_indices)
+    # print(class_indices)
     print(len(class_indices))
     S, S_time = similarity(X[class_indices], metric=metric)
     order, cluster_sz, greedy_time, F_val = get_facility_location_submodular_order(
