@@ -67,7 +67,7 @@ parser.add_argument('--save-dir', dest='save_dir',
 parser.add_argument('--save-every', dest='save_every',
                     help='Saves checkpoints at every specified number of epochs',
                     type=int, default=300)  # default=10)
-parser.add_argument('--gpu', default='0', type=str, help='The GPU to be used')
+parser.add_argument('--gpu', default='2', type=str, help='The GPU to be used')
 parser.add_argument('--greedy', '-g', dest='greedy', action='store_true', default=False, help='greedy ordering')
 parser.add_argument('--subset_size', '-s', dest='subset_size', type=float, help='size of the subset', default=1.0)
 parser.add_argument('--random_subset_size', '-rs', type=float, help='size of the subset', default=1.0)
