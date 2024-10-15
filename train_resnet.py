@@ -11,6 +11,7 @@ import torch.optim
 import torch.utils.data
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
+import torchvision.models as models
 import resnet as resnet
 
 from torch.utils.data import Dataset, DataLoader
@@ -103,7 +104,8 @@ def main(subset_size=.1, greedy=0):
     if not os.path.exists(args.save_dir):
         os.makedirs(args.save_dir)
 
-    model = torch.nn.DataParallel(resnet.__dict__[args.arch]())
+    # model = torch.nn.DataParallel(resnet.__dict__[args.arch]())
+    model = resnet.__dict__[args.arch]()
     model.cuda()
 
     # optionally resume from a checkpoint
@@ -562,8 +564,16 @@ def predictions(loader, model):
 
             if args.half:
                 input_var = input_var.half()
+            print(input_var.device,"input var\n")
+            print(model.device,"model device\n")
 
-            preds[idx, :] = nn.Softmax(dim=1)(model(input_var))
+            soft= nn.Softmax(dim=1).cuda()
+            x = torch.randn(input_var.shape).cuda()
+            out = model(x)
+            print(out.shape)
+            raise KeyboardInterrupt
+            preds[idx, :] = soft(model(input_var))
+
             labels[idx] = target.int()
 
             # measure elapsed time
